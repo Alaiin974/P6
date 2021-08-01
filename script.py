@@ -63,5 +63,5 @@ os.system(vhdocroot)
 
 ##### ENABLE SITE & RESTART APACHE #####
 
-a2enre = 'a2ensite ' + vhconfname + ' && systemctl restart apache2'
+a2enre = 'a2enmod rewrite && a2ensite ' + vhconfname + ' && systemctl restart apache2'
 os.system(a2enre)
