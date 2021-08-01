@@ -1,12 +1,6 @@
 #!/usr/bin/env python3.7
 #-*- coding: utf-8 -*-
 
-########## PRÉREQUIS ##########
-
-#apt install python
-
-########## PRÉREQUIS ##########
-
 import os
 import time
 

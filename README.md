@@ -4,4 +4,4 @@ Ce script a pour but d'installer et faire une configuration minimale :
 LAMP (Apache MariaDB PHP) & déploiement Wordpress.
 
 ## PREREQUIS ##
-apt install python
+apt install python git
