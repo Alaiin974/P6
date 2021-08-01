@@ -11,7 +11,7 @@ time.sleep(2)
 
 os.system('apt install apache2 -y')
 os.system('apt install mariadb-server -y')
-os.system('apt install php7.3 -y')
+os.system('apt install php7.3 php7.3-mysql -y')
 os.system('apt install wget -y')
 os.system('apt install git -y')
 
