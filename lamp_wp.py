@@ -121,3 +121,11 @@ os.system("systemctl restart mariadb")
 
 print ("----- WORDPRESS IS READY TO INSTALL ! -----")
 print ("----- GO TO http://" + servername + "/ -----")
+
+time.sleep(2)
+
+print ("----- Server has to restart -----")
+
+time.sleep(2)
+
+os.system("systemctl reboot")
