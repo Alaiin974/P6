@@ -63,16 +63,16 @@ os.system(vhdocroot)
 
 ##### SET /ETC/HOSTS #####
 
-print ("----- SET /ETC/HOSTS -----")
+print ("----- SETTING /ETC/HOSTS -----")
 time.sleep(2)
 
-hosts = ("sed -i '1i\127.0.1.1       " + servername + " \n /etc/hosts")
+hosts = ("sed -i '1i\127.0.1.1       " + servername + " \n' /etc/hosts")
 
 os.system(hosts)
 
 ##### SET HOSTNAME #####
 
-print ("----- SET HOSTNAME -----")
+print ("----- SETTING HOSTNAME -----")
 time.sleep(2)
 
 hostname = ("sed -i 's/.*/" + wpdirname + "/g' /etc/hostname")
@@ -87,3 +87,10 @@ time.sleep(2)
 a2enre = 'a2enmod rewrite && a2ensite ' + vhconfname + ' && systemctl restart apache2'
 
 os.system(a2enre)
+
+##### SET TIMEZONE #####
+
+print ("----- SET TIMEZONE -----")
+time.sleep(2)
+
+os.system("dpkg-reconfigure tzdata")
