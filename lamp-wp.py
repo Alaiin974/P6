@@ -21,7 +21,7 @@ servername = raw_input ("|2| Specify the domain name for the Wordpress website :
 vhservername = "sed -i 's/wp.default/" + servername + "/g' /etc/apache2/sites-available/" + vhconfname
 vhdocroot = "sed -i 's/wpdefault/" + wpdirname + "/g' /etc/apache2/sites-available/" + vhconfname
 
-hosts = "sed -i '1i\" + "127.0.1.1       " + servername + " \n' /etc/hosts"
+hosts = "sed -i '1i" + "\127.0.1.1       " + servername + " \n' /etc/hosts"
 
 hostname = "sed -i 's/.*/" + wpdirname + "/g' /etc/hostname"
 
