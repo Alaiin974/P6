@@ -66,7 +66,7 @@ os.system(vhdocroot)
 print ("----- SETTING /ETC/HOSTS -----")
 time.sleep(2)
 
-hosts = ("sed -i '1i\127.0.1.1       " + servername + " \n' /etc/hosts")
+hosts = "sed -i '1i\127.0.1.1       " + servername + " \n' /etc/hosts"
 
 os.system(hosts)
 
@@ -75,7 +75,7 @@ os.system(hosts)
 print ("----- SETTING HOSTNAME -----")
 time.sleep(2)
 
-hostname = ("sed -i 's/.*/" + wpdirname + "/g' /etc/hostname")
+hostname = "sed -i 's/.*/" + wpdirname + "/g' /etc/hostname"
 
 os.system(hostname)
 
@@ -94,3 +94,30 @@ print ("----- SET TIMEZONE -----")
 time.sleep(2)
 
 os.system("dpkg-reconfigure tzdata")
+
+##### DATABASE #####
+
+print ("-----SET WORDPRESS DATABASE -----")
+time.sleep(2)
+
+##### DATABASE #####
+
+print ("-----SET WORDPRESS DATABASE -----")
+time.sleep(2)
+
+dbname = raw_input ("Database Name ? ")
+dbname2 = "mysql -u root -e " + '"create database ' + dbname +  '"'
+
+os.system(dbname2)
+
+dbusername = raw_input ("Database User ? ")
+dbpassword = raw_input ("Database User Password ? ")
+
+dbuser = "mysql -u root -e " + '"grant all privileges on *.* to ' + dbusername + '@localhost' + " identified by " + "'" + dbpassword + "'" + '"'
+
+os.system(dbuser)
+os.system("systemctl restart mariadb")
+
+##### WORDPRESS READY #####
+
+print ("----- WORDPRESS IS READY TO USE ! -----"
