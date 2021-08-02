@@ -66,7 +66,7 @@ os.system(vhdocroot)
 print ("----- SET /ETC/HOSTS -----")
 time.sleep(2)
 
-hosts = sed -i "1i\127.0.1.1       " + servername + " \n" /etc/hosts
+hosts = ("sed -i '1i\127.0.1.1       " + servername + " \n /etc/hosts")
 
 os.system(hosts)
 
