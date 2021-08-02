@@ -117,15 +117,30 @@ dbuser = "mysql -u root -e " + '"grant all privileges on *.* to ' + dbusername +
 os.system(dbuser)
 os.system("systemctl restart mariadb")
 
+##### DATABASE CONNECTION #####
+
+print ("----- SETTING DATABASE CONNECTION -----")
+time.sleep(2)
+
+dbconn = "mv /var/www/" + servername + "/wp-config-sample.php /var/www/wp-config.php"
+dbconn2 = "sed -i 's/votre_nom_de_bdd/" + dbname + "/g' /var/www/wp-config.php"
+dbconn3 = "sed -i 's/votre_utilisateur_de_bdd/" + dbusername + "/g' /var/www/wp-config.php"
+dbconn4 = "sed -i 's/votre_mdp_de_bdd/" + dbpassword + "/g' /var/www/wp-config.php"
+
+os.system (dbconn)
+os.system (dbconn2)
+os.system (dbconn3)
+os.system (dbconn4)
+
 ##### WORDPRESS READY #####
 
 print ("----- WORDPRESS IS READY TO INSTALL ! -----")
-print ("----- GO TO http://" + servername + "/ -----")
-
 time.sleep(2)
 
-print ("----- Server has to restart -----")
-
+print ("----- SERVER IS GOING TO REBOOT -----")
 time.sleep(2)
+
+print ("----- WHEN SERVER IS REBOOTED : GO TO http://" + servername + "/ -----")
+time.sleep(5)
 
 os.system("systemctl reboot")
