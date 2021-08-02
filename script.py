@@ -25,7 +25,7 @@ os.system ('tar xvf latest.tar.gz')
 
 ##### /VAR/WWW/HTML & APACHE CONF #####
 
-print ("----- SET DEFAULT APACHE DIRECTORY -----")
+print ("----- SETTING DEFAULT APACHE DIRECTORY -----")
 time.sleep(2)
 
 a2dir = ("sed -i 's/html//g' /etc/apache2/sites-enabled/000-default.conf")
