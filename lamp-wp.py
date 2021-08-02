@@ -21,7 +21,7 @@ servername = raw_input ("|2| Specify the domain name for the Wordpress website :
 vhservername = "sed -i 's/wp.default/" + servername + "/g' /etc/apache2/sites-available/" + vhconfname
 vhdocroot = "sed -i 's/wpdefault/" + wpdirname + "/g' /etc/apache2/sites-available/" + vhconfname
 
-hosts = "sed -i '1i/" + "127.0.1.1       " + servername + " \n' /etc/hosts"
+hosts = "sed -i '1i\" + "127.0.1.1       " + servername + " \n' /etc/hosts"
 
 hostname = "sed -i 's/.*/" + wpdirname + "/g' /etc/hostname"
 
@@ -44,9 +44,10 @@ dbconn4 = "sed -i 's/votre_mdp_de_bdd/" + dbpassword + "/g' /var/www/" + wpdirna
 
 ##### SET TIMEZONE #####
 
-print ("----- SET TIMEZONE -----")
+print ("----- |6| SET TIMEZONE -----")
 time.sleep(2)
 
+## ADMIN INTERACTION |6|
 os.system("dpkg-reconfigure tzdata")
 
 ##### PACKAGES INSTALLATON #####
@@ -58,6 +59,14 @@ os.system('apt install apache2 -y')
 os.system('apt install mariadb-server -y')
 os.system('apt install php7.3 php7.3-mysql -y')
 os.system('apt install wget -y')
+
+##### SECURE MARIADB #####
+
+print ("----- |7| SECURE MARIADB -----")
+time.sleep(2)
+
+##ADMIN INTERACTION |7|
+os.system("mysql_secure_installation")
 
 ##### LATEST WORDPRESS ARCHIVE #####
 
@@ -131,13 +140,6 @@ os.system(dbconn)
 os.system(dbconn2)
 os.system(dbconn3)
 os.system(dbconn4)
-
-##### SECURE MARIADB #####
-
-print ("----- SECURE MARIADB -----")
-time.sleep(2)
-
-os.system("mysql_secure_installation")
 
 ##### WORDPRESS READY #####
 
