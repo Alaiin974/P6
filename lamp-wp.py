@@ -9,13 +9,15 @@ import time
 a2dir = ("sed -i 's/html//g' /etc/apache2/sites-enabled/000-default.conf")
 
 wpdir = '/var/www/' 
-wpdirname = raw_input ("Wordpress Directory Name ? " )
+## ADMIN INTERACTION |1|
+wpdirname = raw_input ("|1| Choose a name for the Wordpress Directory : " )
 wpdirname1 = 'mv wordpress ' + '/var/www/' + wpdirname
 chwpdir = 'chmod -R 755 /var/www/' + wpdirname + ' && chown -R www-data:www-data /var/www/' + wpdirname
 
 vhconfname = wpdirname + ".conf"
 vhconfcp = 'cp virtualhost.conf /etc/apache2/sites-available/' + vhconfname
-servername = raw_input ("Server Name ? ")
+## ADMIN INTERACTION |2|
+servername = raw_input ("|2| Specify the domain name for the Wordpress website : ")
 vhservername = "sed -i 's/wp.default/" + servername + "/g' /etc/apache2/sites-available/" + vhconfname
 vhdocroot = "sed -i 's/wpdefault/" + wpdirname + "/g' /etc/apache2/sites-available/" + vhconfname
 
@@ -27,11 +29,13 @@ hostname = "sed -i 's/.*/" + wpdirname + "/g' /etc/hostname"
 
 a2enre = 'a2enmod rewrite && a2ensite ' + vhconfname + ' && systemctl restart apache2'
 
-dbname = raw_input ("Database Name ? ")
+## ADMIN INTERACTION |3|
+dbname = raw_input ("|3| Choose a name for the Wordpress Database : ")
 dbname2 = "mysql -u root -e " + '"create database ' + dbname +  '"'
-
-dbusername = raw_input ("Database User ? ")
-dbpassword = raw_input ("Database User Password ? ")
+## ADMIN INTERACTION |4|
+dbusername = raw_input ("|4| Choose a name for the Database User : ")
+## ADMIN INTERACTION |5|
+dbpassword = raw_input ("|5| Choose a password for the Database User : ")
 
 dbuser = "mysql -u root -e " + '"grant all privileges on *.* to ' + dbusername + '@localhost' + " identified by " + "'" + dbpassword + "'" + '"'
 
@@ -49,7 +53,7 @@ os.system("dpkg-reconfigure tzdata")
 
 ##### PACKAGES INSTALLATON #####
 
-print ("----- PACKAGES INSTALLATON : APACHE2, MARIADB-SERVER, PHP, WGET -----")
+print ("----- PACKAGES INSTALLATON : APACHE2, MARIADB-SERVER, PHP7.3, PHP7.3-MYSQL, WGET -----")
 time.sleep(2)
 
 os.system('apt install apache2 -y')
@@ -113,7 +117,7 @@ os.system(a2enre)
 
 ##### WORDPRESS DATABASE #####
 
-print ("-----SET WORDPRESS DATABASE -----")
+print ("-----SETTING WORDPRESS DATABASE -----")
 time.sleep(2)
 
 os.system(dbname2)
@@ -125,10 +129,17 @@ os.system("systemctl restart mariadb")
 print ("----- SETTING DATABASE CONNECTION -----")
 time.sleep(2)
 
-os.system (dbconn)
-os.system (dbconn2)
-os.system (dbconn3)
-os.system (dbconn4)
+os.system(dbconn)
+os.system(dbconn2)
+os.system(dbconn3)
+os.system(dbconn4)
+
+##### SECURE MARIADB #####
+
+print ("----- SECURE MARIADB -----")
+time.sleep(2)
+
+os.system("mysql_secure_installation")
 
 ##### WORDPRESS READY #####
 
