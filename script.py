@@ -61,7 +61,29 @@ os.system(vhconfcp)
 os.system(vhservername)
 os.system(vhdocroot)
 
+##### SET /ETC/HOSTS #####
+
+print ("----- SET /ETC/HOSTS -----")
+time.sleep(2)
+
+hosts = sed -i "1i\127.0.1.1       " + servername + " \n" /etc/hosts
+
+os.system(hosts)
+
+##### SET HOSTNAME #####
+
+print ("----- SET HOSTNAME -----")
+time.sleep(2)
+
+hostname = ("sed -i 's/.*/" + wpdirname + "/g' /etc/hostname")
+
+os.system(hostname)
+
 ##### ENABLE SITE & RESTART APACHE #####
 
+print ("----- ENABLE SITE  & RESTART APACHE -----")
+time.sleep(2)
+
 a2enre = 'a2enmod rewrite && a2ensite ' + vhconfname + ' && systemctl restart apache2'
+
 os.system(a2enre)
