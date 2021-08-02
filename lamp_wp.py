@@ -122,10 +122,10 @@ os.system("systemctl restart mariadb")
 print ("----- SETTING DATABASE CONNECTION -----")
 time.sleep(2)
 
-dbconn = "mv /var/www/" + servername + "/wp-config-sample.php /var/www/wp-config.php"
-dbconn2 = "sed -i 's/votre_nom_de_bdd/" + dbname + "/g' /var/www/wp-config.php"
-dbconn3 = "sed -i 's/votre_utilisateur_de_bdd/" + dbusername + "/g' /var/www/wp-config.php"
-dbconn4 = "sed -i 's/votre_mdp_de_bdd/" + dbpassword + "/g' /var/www/wp-config.php"
+dbconn = "mv /var/www/" + wpdirname + "/wp-config-sample.php /var/www/" + wpdirname + "/wp-config.php"
+dbconn2 = "sed -i 's/votre_nom_de_bdd/" + dbname + "/g' /var/www/" + wpdirname + "/wp-config.php"
+dbconn3 = "sed -i 's/votre_utilisateur_de_bdd/" + dbusername + "/g' /var/www/" + wpdirname + "/wp-config.php"
+dbconn4 = "sed -i 's/votre_mdp_de_bdd/" + dbpassword + "/g' /var/www/" + wpdirname + "/wp-config.php"
 
 os.system (dbconn)
 os.system (dbconn2)
