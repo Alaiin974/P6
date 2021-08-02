@@ -6,9 +6,9 @@ import time
 
 ##### VARIABLES #####
 
-a2dir = ("sed -i 's/html//g' /etc/apache2/sites-enabled/000-default.conf")
+a2dir = "sed -i 's/html//g' /etc/apache2/sites-enabled/000-default.conf"
 
-wpdir = '/var/www/' 
+wpdir = '/var/www/'
 ## ADMIN INTERACTION |1|
 wpdirname = raw_input ("|1| Choose a name for the Wordpress Directory : " )
 wpdirname1 = 'mv wordpress ' + '/var/www/' + wpdirname
@@ -21,9 +21,7 @@ servername = raw_input ("|2| Specify the domain name for the Wordpress website :
 vhservername = "sed -i 's/wp.default/" + servername + "/g' /etc/apache2/sites-available/" + vhconfname
 vhdocroot = "sed -i 's/wpdefault/" + wpdirname + "/g' /etc/apache2/sites-available/" + vhconfname
 
-hosts = "sed -i '1i\127.0.1.1       " + servername + " \n' /etc/hosts"
-
-sed -i '1i\127.0.1.1       TEST \n' /etc/hosts
+hosts = "sed -i '1i/" + "127.0.1.1       " + servername + " \n' /etc/hosts"
 
 hostname = "sed -i 's/.*/" + wpdirname + "/g' /etc/hostname"
 
