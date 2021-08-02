@@ -120,4 +120,4 @@ os.system("systemctl restart mariadb")
 
 ##### WORDPRESS READY #####
 
-print ("----- WORDPRESS IS READY TO USE ! -----"
+print ("----- WORDPRESS IS READY TO USE ! -----")
