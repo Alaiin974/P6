@@ -22,6 +22,7 @@ vhservername = "sed -i 's/wp.default/" + servername + "/g' /etc/apache2/sites-av
 vhdocroot = "sed -i 's/wpdefault/" + wpdirname + "/g' /etc/apache2/sites-available/" + vhconfname
 
 hosts = "sed -i '1i" + "\127.0.1.1       " + servername + " \n' /etc/hosts"
+hostname --ip-address
 
 hostname = "sed -i 's/.*/" + wpdirname + "/g' /etc/hostname"
 
@@ -67,6 +68,27 @@ time.sleep(2)
 
 ##ADMIN INTERACTION |7|
 os.system("mysql_secure_installation")
+
+##### VERIFICATION #####
+print("Please check your informations below before continue :")
+time.sleep(2)
+print("Wordpress Directory : /var/www/" + wpdirname)
+print("Domain Name : " + servername)
+print("Wordpress Database : " + dbname)
+print("Database User : " + dbusername)
+print("Database Password : " + dbpassword)
+time.sleep(5)
+
+verification=raw_input("Is this correct ? (y/n) ")
+
+if verification == "y" :
+	continue
+elif verification == "n" :
+	break
+print("Please replay the script")
+else :
+	break
+print("Incorrect argument, please replay the script")
 
 ##### LATEST WORDPRESS ARCHIVE #####
 
