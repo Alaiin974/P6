@@ -2,7 +2,6 @@
 #-*- coding: utf-8 -*-
 
 import os
-import time
 
 ##### https://certbot.eff.org/lets-encrypt/debianbuster-apache #####
 

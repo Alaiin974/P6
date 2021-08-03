@@ -22,9 +22,8 @@ vhservername = "sed -i 's/wp.default/" + servername + "/g' /etc/apache2/sites-av
 vhdocroot = "sed -i 's/wpdefault/" + wpdirname + "/g' /etc/apache2/sites-available/" + vhconfname
 
 hosts = "sed -i '1i" + "\127.0.1.1       " + servername + " \n' /etc/hosts"
-hostname --ip-address
 
-hostname = "sed -i 's/.*/" + wpdirname + "/g' /etc/hostname"
+hostname = "sed -i 's/.*/" + servername + "/g' /etc/hostname"
 
 a2enre = 'a2enmod rewrite && a2ensite ' + vhconfname + ' && systemctl restart apache2'
 
@@ -45,11 +44,35 @@ dbconn4 = "sed -i 's/votre_mdp_de_bdd/" + dbpassword + "/g' /var/www/" + wpdirna
 
 ##### SET TIMEZONE #####
 
-print ("----- |6| SET TIMEZONE -----")
+print ("|6| Set your Timezone : ")
 time.sleep(2)
 
 ## ADMIN INTERACTION |6|
 os.system("dpkg-reconfigure tzdata")
+
+##### VERIFICATION #####
+print("\n--------------------------------------------------")
+print("| PLEASE CHECK YOUR INFORMATIONS BEFORE CONTINUE |")
+print("--------------------------------------------------\n")
+time.sleep(2)
+
+print("Wordpress Directory (/var/www/'directory') : /var/www/" + wpdirname)
+print("Domain Name (FQDN) : " + servername)
+print("Wordpress Database : " + dbname)
+print("Database User : " + dbusername)
+print("Database Password : " + dbpassword)
+print('Timezone : ' + os.popen('cat /etc/timezone').read())
+time.sleep(5)
+
+## ADMIN INTERCATION |7|
+while True:
+        verification = raw_input('Is this correct ? (y/n) ')
+        if verification.lower().startswith("y"):
+                break
+        elif verification != "y":
+                print ("\n----- SCRIPT ABORTED, PLEASE RETRY -----\n")
+                exit()
+time.sleep(2)
 
 ##### PACKAGES INSTALLATON #####
 
@@ -63,36 +86,15 @@ os.system('apt install wget -y')
 
 ##### SECURE MARIADB #####
 
-print ("----- |7| SECURE MARIADB -----")
-time.sleep(2)
+#print ("----- |8| SECURE MARIADB")
+#time.sleep(2)
 
-##ADMIN INTERACTION |7|
-os.system("mysql_secure_installation")
-
-##### VERIFICATION #####
-print("Please check your informations below before continue :")
-time.sleep(2)
-print("Wordpress Directory : /var/www/" + wpdirname)
-print("Domain Name : " + servername)
-print("Wordpress Database : " + dbname)
-print("Database User : " + dbusername)
-print("Database Password : " + dbpassword)
-time.sleep(5)
-
-verification=raw_input("Is this correct ? (y/n) ")
-
-if verification == "y" :
-	continue
-elif verification == "n" :
-	break
-print("Please replay the script")
-else :
-	break
-print("Incorrect argument, please replay the script")
+##ADMIN INTERACTION |8|
+#os.system("mysql_secure_installation")
 
 ##### LATEST WORDPRESS ARCHIVE #####
 
-print ("----- DOWNLOADING AND UNCOMPRESSING LATEST WORDPRESS ARCHIVE -----")
+print ("----- DOWNLOADING AND UNCOMPRESSING LATEST WORDPRESS ARCHIVE")
 time.sleep(2)
 
 #os.system('wget https://wordpress.org/latest.tar.gz')
@@ -100,7 +102,7 @@ os.system ('tar xvf latest.tar.gz')
 
 ##### /VAR/WWW/HTML & APACHE CONF #####
 
-print ("----- SETTING DEFAULT APACHE DIRECTORY -----")
+print ("----- SETTING DEFAULT APACHE DIRECTORY")
 time.sleep(2)
 
 os.system(a2dir)
@@ -108,7 +110,7 @@ os.system('rm -r /var/www/html')
 
 ##### WORDPRESS DIRECTORY #####
 
-print ("----- SETTING WORDPRESS DIRECTORY -----")
+print ("----- SETTING WORDPRESS DIRECTORY")
 time.sleep(2)
 
 os.system(wpdirname1)
@@ -116,7 +118,7 @@ os.system(chwpdir)
 
 ##### VIRTUALHOST #####
 
-print ("----- SETTING VIRTUALHOST -----")
+print ("----- SETTING VIRTUALHOST")
 time.sleep(2)
 
 os.system(vhconfcp)
@@ -125,28 +127,28 @@ os.system(vhdocroot)
 
 ##### /ETC/HOSTS #####
 
-print ("----- SETTING /ETC/HOSTS -----")
+print ("----- SETTING /ETC/HOSTS")
 time.sleep(2)
 
 os.system(hosts)
 
 ##### /ETC/HOSTNAME #####
 
-print ("----- SETTING /ETC/HOSTNAME -----")
+print ("----- SETTING /ETC/HOSTNAME")
 time.sleep(2)
 
 os.system(hostname)
 
 ##### ENABLE SITE & RESTART APACHE #####
 
-print ("----- ENABLING SITE  & RESTARTING APACHE -----")
+print ("----- ENABLING SITE  & RESTARTING APACHE")
 time.sleep(2)
 
 os.system(a2enre)
 
 ##### WORDPRESS DATABASE #####
 
-print ("-----SETTING WORDPRESS DATABASE -----")
+print ("-----SETTING WORDPRESS DATABASE")
 time.sleep(2)
 
 os.system(dbname2)
@@ -155,7 +157,7 @@ os.system("systemctl restart mariadb")
 
 ##### DATABASE CONNECTION #####
 
-print ("----- SETTING DATABASE CONNECTION -----")
+print ("----- SETTING DATABASE CONNECTION")
 time.sleep(2)
 
 os.system(dbconn)
@@ -164,9 +166,6 @@ os.system(dbconn3)
 os.system(dbconn4)
 
 ##### WORDPRESS READY #####
-
-print ("----- WORDPRESS IS READY TO INSTALL ! -----")
-time.sleep(2)
 
 print ("----- SERVER IS GOING TO REBOOT -----")
 time.sleep(2)
