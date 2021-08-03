@@ -6,13 +6,12 @@ import time
 
 ##### VARIABLES #####
 
-a2dir = "sed -i 's/html//g' /etc/apache2/sites-enabled/000-default.conf"
-
-wpdir = '/var/www/'
 ## ADMIN INTERACTION |1|
 wpdirname = raw_input ("|1| Choose a name for the Wordpress Directory : " )
 wpdirname1 = 'mv wordpress ' + '/var/www/' + wpdirname
 chwpdir = 'chmod -R 755 /var/www/' + wpdirname + ' && chown -R www-data:www-data /var/www/' + wpdirname
+
+a2dir = "sed -i 's/html/" + wpdirname + "/g' /etc/apache2/sites-enabled/000-default.conf"
 
 vhconfname = wpdirname + ".conf"
 vhconfcp = 'cp virtualhost.conf /etc/apache2/sites-available/' + vhconfname
@@ -86,11 +85,11 @@ os.system('apt install wget -y')
 
 ##### SECURE MARIADB #####
 
-#print ("----- |8| SECURE MARIADB")
-#time.sleep(2)
+print ("----- |8| SECURE MARIADB")
+time.sleep(2)
 
 ##ADMIN INTERACTION |8|
-#os.system("mysql_secure_installation")
+os.system("mysql_secure_installation")
 
 ##### LATEST WORDPRESS ARCHIVE #####
 
@@ -167,10 +166,10 @@ os.system(dbconn4)
 
 ##### WORDPRESS READY #####
 
-print ("----- SERVER IS GOING TO REBOOT -----")
+print ("----- SERVER IS GOING TO REBOOT")
 time.sleep(2)
 
-print ("----- WHEN SERVER IS REBOOTED : GO TO http://" + servername + "/ -----")
+print ("----- WHEN SERVER IS REBOOTED : GO TO http://" + servername + "/")
 time.sleep(5)
 
 os.system("systemctl reboot")
