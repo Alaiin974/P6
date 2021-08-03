@@ -66,7 +66,7 @@ time.sleep(5)
 
 ## ADMIN INTERCATION |7|
 while True:
-        verification = raw_input('Is this correct ? (y/n) ')
+        verification = raw_input('Is this correct ? (y/n) \n')
         if verification.lower().startswith("y"):
                 break
         elif verification != "y":
@@ -148,7 +148,7 @@ os.system(a2enre)
 
 ##### WORDPRESS DATABASE #####
 
-print ("-----SETTING WORDPRESS DATABASE")
+print ("----- SETTING WORDPRESS DATABASE")
 time.sleep(2)
 
 os.system(dbname2)

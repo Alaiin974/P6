@@ -14,6 +14,8 @@
 3) Theses packages have to be installed :
 apt install python git
 
+## TO EXECUTE A SCRIPT, DO : python lamp-wp.py OR python letsencrypt.py
+
 ## |1| WHAT IT DOES ? ##
 
 1) Set Timezone
