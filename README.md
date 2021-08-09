@@ -2,7 +2,7 @@
 
 1) lamp-wp.py : Script deploying LAMP & Wordpress
 
-2) letsencrypt.py : Script deploying Free R3 SSL Cerficate
+2) letsencrypt.py : Script deploying Free R3 SSL Certificate
 
 ## REQUIREMENTS ##
 
